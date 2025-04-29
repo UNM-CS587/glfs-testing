@@ -6,7 +6,7 @@ import glfs_client
 import os
 
 @pytest.fixture(scope="session")
-def server(request):
+def server():
     print("Starting test server thread")
     server = glfs_server.create_server("localhost", 12345)
     server.start()
@@ -14,13 +14,13 @@ def server(request):
     print("Tearing down test server thread")
     smtp.stop()
 
-def test_server_connection():
+def test_server_connection(server):
     # Use GLFS_Log to connect to a server
     l = GLFS_Log("localhost", 12345)
     # Close that connection 
     l = None;
 
-def test_root_directory_contents():
+def test_root_directory_contents(server):
     # Use GLFS_Log to connect to a server
     l = GLFS_Log("localhost", 12345)
 
@@ -33,7 +33,7 @@ def test_root_directory_contents():
     # Release the connection
     l = None
 
-def test_root_directory_stat():
+def test_root_directory_stat(server):
     # Use GLFS_Log to connect to a server
     l = GLFS_Log("localhost", 12345)
 
