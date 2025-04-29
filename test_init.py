@@ -8,17 +8,11 @@ import os
 @pytest.fixture(scope="session")
 def server():
     print("Starting test server thread")
-    server = glfs_server.create_server("localhost", 12345)
-    server.start()
-    yield server  # provide the fixture value
+    _server = glfs_server.create_server("localhost", 12345)
+    _server.start()
+    yield _server  # provide the fixture value
     print("Tearing down test server thread")
-    smtp.stop()
-
-def test_server_connection(server):
-    # Use GLFS_Log to connect to a server
-    l = GLFS_Log("localhost", 12345)
-    # Close that connection 
-    l = None;
+    _server.stop()
 
 def test_root_directory_contents(server):
     # Use GLFS_Log to connect to a server
