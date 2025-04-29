@@ -1,14 +1,18 @@
-import smtplib
 import pytest
 
 import glfs_server
 import glfs_client
+
 import os
 
 @pytest.fixture(scope="session")
 def server():
+    try:
+        os.remove("glfsserver.log")
+    except:
+        pass
     print("Starting test server thread")
-    _server = glfs_server.create_server("localhost", 12345)
+    _server = glfs_server.create_server("glfsserver.log", 12345)
     _server.start()
     yield _server  # provide the fixture value
     print("Tearing down test server thread")
