@@ -5,9 +5,6 @@ import glfs_client
 
 import os
 
-LFS_REGULAR_FILE=0
-LFS_DIRECTORY=1
-
 @pytest.fixture(scope="session")
 def server():
     try:
@@ -26,7 +23,7 @@ def test_create_empty_file(server):
     l = glfs_client.GLFS_Log("localhost", 12345)
 
     # Create an empty regular file in the root directory
-    l.creat(0, LFS_REGULAR_FILE, "empty.txt")
+    l.creat(0, glfs_client.LFS_REGULAR_FILE, "empty.txt")
 
     # Make sure we can look it up.
     fnum = l.lookup(0, "empty.txt")
@@ -45,7 +42,7 @@ def test_stat_empty_file(server):
  
     # Stat the file and see if its type and size are right
     type, size = l.stat(fnum)
-    assert type == LFS_REGULAR_FILE
+    assert type == glfs_client.LFS_REGULAR_FILE
     assert size == 0
 
     # release the log object 
@@ -56,7 +53,7 @@ def test_create_directory(server):
     l = glfs_client.GLFS_Log("localhost", 12345)
 
     # Create an empty directory in the root directory
-    l.creat(0, LFS_DIRECTORY, "testdir")
+    l.creat(0, glfs_client.LFS_DIRECTORY, "testdir")
     
     # Look up the empty directory
     fnum = l.lookup(0, "testdir")
@@ -74,7 +71,7 @@ def test_create_directory(server):
     type, size = l.stat(fnum)
 
     # It should be a directory
-    assert type == LFS_DIRECTORY
+    assert type == glfs_client.LFS_DIRECTORY
 
     # Still with one block of entries
     assert size == 4096
@@ -85,7 +82,7 @@ def test_create_long_name(server):
 
     # Create a file with a long name
     try: 
-        l.creat(0, LFS_REGULAR_FILE, "thisnameistoolongforcreatetosucceedwithitshouldfail.txt")
+        l.creat(0, glfs_client.LFS_REGULAR_FILE, "thisnameistoolongforcreatetosucceedwithitshouldfail.txt")
     except:
         pass
     else:
@@ -97,7 +94,7 @@ def test_create_duplicate_name(server):
 
     # Try to create a duplicate ".". THIS SHOULD SUCCEED but not actually 
     # make a duplicate
-    l.creat(0, LFS_DIRECTORY, ".")
+    l.creat(0, glfs_client.LFS_DIRECTORY, ".")
 
     # Now read the directory contents directly
     bytes = l.read(0, 0)

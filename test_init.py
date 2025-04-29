@@ -39,7 +39,7 @@ def test_root_directory_stat(server):
     type, size = l.stat(0)
 
     # It should be a directory
-    assert type == LFS_DIRECTORY
+    assert type == glfs_client.LFS_DIRECTORY
 
     # Still with one block of data
     assert size == 4096
