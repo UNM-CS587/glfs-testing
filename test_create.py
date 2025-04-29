@@ -19,14 +19,8 @@ def server():
     _server.stop()
 
 def test_create_empty_file(server):
-    # Remove any journal if it already exists
-    try:
-        os.remove("lfstest.log")
-    except FileNotFoundError:
-        pass
-
-    # Use LFS_Log to create a new journal
-    l = LFS_Log("lfstest.log")
+    # Connect to the log server
+    l = GLFS_Log("localhost", 12345)
 
     # Create an empty regular file in the root directory
     l.creat(0, LFS_REGULAR_FILE, "empty.txt")
@@ -39,8 +33,8 @@ def test_create_empty_file(server):
     l = None
 
 def test_stat_empty_file(server):
-    # Open the existing log
-    l = LFS_Log("lfstest.log")
+    # Connect to the log server
+    l = GLFS_Log("localhost", 12345)
 
     # Look it the still existing empty file
     fnum = l.lookup(0, "empty.txt")
@@ -55,8 +49,8 @@ def test_stat_empty_file(server):
     l = None
 
 def test_create_directory(server):
-    # Open the existing log
-    l = LFS_Log("lfstest.log")
+    # Connect to the log server
+    l = GLFS_Log("localhost", 12345)
 
     # Create an empty directory in the root directory
     l.creat(0, LFS_DIRECTORY, "testdir")
@@ -83,8 +77,8 @@ def test_create_directory(server):
     assert size == 4096
 
 def test_create_long_name(server):
-    # Open the existing log
-    l = LFS_Log("lfstest.log")
+    # Connect to the log server
+    l = GLFS_Log("localhost", 12345)
 
     # Create a file with a long name
     try: 
@@ -95,8 +89,8 @@ def test_create_long_name(server):
         raise AssertionError("LFS_Creat did not fail with a name that was too long.");
 
 def test_create_duplicate_name(server):
-    # Open the existing log
-    l = LFS_Log("lfstest.log")
+    # Connect to the log server
+    l = GLFS_Log("localhost", 12345)
 
     # Try to create a duplicate ".". THIS SHOULD SUCCEED but not actually 
     # make a duplicate
