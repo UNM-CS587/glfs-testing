@@ -20,7 +20,7 @@ def server():
 
 def test_root_directory_contents(server):
     # Use GLFS_Log to connect to a server
-    l = GLFS_Log("localhost", 12345)
+    l = glfs_client.GLFS_Log("localhost", 12345)
 
     # Lookup '.' in the root inode and make sure it is inode 0
     assert l.lookup(0, ".") == 0
@@ -33,7 +33,7 @@ def test_root_directory_contents(server):
 
 def test_root_directory_stat(server):
     # Use GLFS_Log to connect to a server
-    l = GLFS_Log("localhost", 12345)
+    l = glfs_client.GLFS_Log("localhost", 12345)
 
     # Stat the root directory
     type, size = l.stat(0)

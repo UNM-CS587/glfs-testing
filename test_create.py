@@ -20,7 +20,7 @@ def server():
 
 def test_create_empty_file(server):
     # Connect to the log server
-    l = GLFS_Log("localhost", 12345)
+    l = glfs_client.GLFS_Log("localhost", 12345)
 
     # Create an empty regular file in the root directory
     l.creat(0, LFS_REGULAR_FILE, "empty.txt")
@@ -34,7 +34,7 @@ def test_create_empty_file(server):
 
 def test_stat_empty_file(server):
     # Connect to the log server
-    l = GLFS_Log("localhost", 12345)
+    l = glfs_client.GLFS_Log("localhost", 12345)
 
     # Look it the still existing empty file
     fnum = l.lookup(0, "empty.txt")
@@ -50,7 +50,7 @@ def test_stat_empty_file(server):
 
 def test_create_directory(server):
     # Connect to the log server
-    l = GLFS_Log("localhost", 12345)
+    l = glfs_client.GLFS_Log("localhost", 12345)
 
     # Create an empty directory in the root directory
     l.creat(0, LFS_DIRECTORY, "testdir")
@@ -78,7 +78,7 @@ def test_create_directory(server):
 
 def test_create_long_name(server):
     # Connect to the log server
-    l = GLFS_Log("localhost", 12345)
+    l = glfs_client.GLFS_Log("localhost", 12345)
 
     # Create a file with a long name
     try: 
@@ -90,7 +90,7 @@ def test_create_long_name(server):
 
 def test_create_duplicate_name(server):
     # Connect to the log server
-    l = GLFS_Log("localhost", 12345)
+    l = glfs_client.GLFS_Log("localhost", 12345)
 
     # Try to create a duplicate ".". THIS SHOULD SUCCEED but not actually 
     # make a duplicate
