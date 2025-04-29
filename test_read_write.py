@@ -18,7 +18,7 @@ def server():
     print("Tearing down test server thread")
     _server.stop(None)
 
-def test_single_write():
+def test_single_write(server):
     # Connect to the log server
     l = glfs_client.GLFS_Log("localhost", 12345)
 
@@ -48,7 +48,7 @@ def test_single_write():
     # Close the log
     l = None
 
-def test_invalid_write():
+def test_invalid_write(server):
     # Connect to the log server
     l = glfs_client.GLFS_Log("localhost", 12345)
 
@@ -76,7 +76,7 @@ def test_invalid_write():
     else:
         raise AssertionError("Write to invalid inode number did not throw an exception")
 
-def test_single_read():
+def test_single_read(server):
     # Connect to the log server
     l = glfs_client.GLFS_Log("localhost", 12345)
 
@@ -93,7 +93,7 @@ def test_single_read():
     # Close the log 
     l = None;
 
-def test_second_write():
+def test_second_write(server):
     # Connect to the log server
     l = glfs_client.GLFS_Log("localhost", 12345)
 

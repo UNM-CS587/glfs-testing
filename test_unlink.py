@@ -18,7 +18,7 @@ def server():
     print("Tearing down test server thread")
     _server.stop(None)
 
-def test_unlink_empty_file():
+def test_unlink_empty_file(server):
     # Use LFS_Log to create a new journal
     l = glfs_client.GLFS_Log("localhost", 12345)
 
@@ -43,7 +43,7 @@ def test_unlink_empty_file():
     # release the log object 
     l = None
 
-def test_unlink_empty_directory():
+def test_unlink_empty_directory(server):
     # Use LFS_Log to create a new journal
     l = glfs_client.GLFS_Log("localhost", 12345)
     l = LFS_Log("lfstest.log")
@@ -69,7 +69,7 @@ def test_unlink_empty_directory():
     # release the log object 
     l = None
 
-def test_unlink_nonempty_directory():
+def test_unlink_nonempty_directory(server):
     # Use LFS_Log to create a new journal
     l = glfs_client.GLFS_Log("localhost", 12345)
 
@@ -91,7 +91,7 @@ def test_unlink_nonempty_directory():
     else:
         raise AssertionError("Was able to unlink non-empty directory.")
 
-def test_unlink_nonexistent_file():
+def test_unlink_nonexistent_file(server):
     # Use LFS_Log to create a new journal
     l = glfs_client.GLFS_Log("localhost", 12345)
 
