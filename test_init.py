@@ -5,7 +5,7 @@ import glfs_client
 
 import os
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def server():
     try:
         os.remove("glfsserver.log")
