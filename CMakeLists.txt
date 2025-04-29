@@ -8,7 +8,8 @@ find_package(Pytest)
 
 if (ENABLE_LFS_C_LIBRARY)
     pytest_discover_tests(
-        LFSTest
+        GLFSTest
+        BUNDLE_TESTS
         LIBRARY_PATH_PREPEND
             $<TARGET_FILE_DIR:lfs>
         PYTHON_PATH_PREPEND
@@ -18,7 +19,8 @@ if (ENABLE_LFS_C_LIBRARY)
     )
 else (ENABLE_LFS_C_LIBRARY)
     pytest_discover_tests(
-        LFSTest
+        GLFSTest
+        BUNDLE_TESTS
         PYTHON_PATH_PREPEND
             ${CMAKE_CURRENT_BINARY_DIR}/../src
         TRIM_FROM_NAME "^test_"
