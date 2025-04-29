@@ -16,7 +16,7 @@ def server():
     _server.start()
     yield _server  # provide the fixture value
     print("Tearing down test server thread")
-    _server.stop()
+    _server.stop(None)
 
 def test_root_directory_contents(server):
     # Use GLFS_Log to connect to a server
