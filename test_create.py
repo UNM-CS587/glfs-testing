@@ -5,6 +5,9 @@ import glfs_client
 
 import os
 
+LFS_REGULAR_FILE=0
+LFS_DIRECTORY=1
+
 @pytest.fixture(scope="session")
 def server():
     try:
