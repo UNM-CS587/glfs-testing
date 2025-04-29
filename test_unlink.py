@@ -46,7 +46,6 @@ def test_unlink_empty_file(server):
 def test_unlink_empty_directory(server):
     # Use LFS_Log to create a new journal
     l = glfs_client.GLFS_Log("localhost", 12345)
-    l = LFS_Log("lfstest.log")
 
     # Create an empty directory in the root directory
     l.creat(0, glfs_client.LFS_DIRECTORY, "emptydir")
