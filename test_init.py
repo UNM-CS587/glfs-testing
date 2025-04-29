@@ -1,5 +1,18 @@
+import smtplib
+import pytest
+
+import glfs_server
 import glfs_client
 import os
+
+@pytest.fixture(scope="session")
+def server(request):
+    print("Starting test server thread")
+    server = glfs_server.create_server("localhost", 12345)
+    server.start()
+    yield server  # provide the fixture value
+    print("Tearing down test server thread")
+    smtp.stop()
 
 def test_server_connection():
     # Use GLFS_Log to connect to a server
