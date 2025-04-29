@@ -18,9 +18,6 @@ def server():
     print("Tearing down test server thread")
     _server.stop(None)
 
-def test_create_empty_file(server):
-
-
 def test_single_write():
     # Connect to the log server
     l = glfs_client.GLFS_Log("localhost", 12345)
